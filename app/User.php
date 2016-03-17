@@ -1,9 +1,26 @@
 <?php
 
-use League\Fractal;
+namespace App;
 
-$fractal = new Fractal\Manager();
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-if (isset($_GET['include'])) {
-    $fractal->parseIncludes($_GET['include']);
+class User extends Authenticatable
+{
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 }
