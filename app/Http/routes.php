@@ -29,3 +29,29 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+Route::get('/register ', function () {
+    $user = new App\User();
+    $user->name = 'test user';
+    $user->email = 'test@test.com';
+    $user->password = \Illuminate\Support\Facades\Hash::make('password');
+    $user->save();
+
+});
+
+Route::get('/', 'WelcomeController@index');
+Route::get('home', 'HomeController@index');
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
+Route::post('oauth/access_token', function() {
+    return Response::json(Authorizer::issueAccessToken());
+});
+Route::get('api', ['before' => 'oauth', function() {
+    // return the protected resource
+    //echo “success authentication”;
+    $user_id=Authorizer::getResourceOwnerId(); // the token user_id
+    $user=\App\User::find($user_id);// get the user data from database
+    return Response::json($user);
+}]);
