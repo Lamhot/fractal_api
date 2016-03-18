@@ -20,7 +20,7 @@ class PenulisTest extends TestCase
         $model = $this->penulis->make();
 
         $expected = [
-            'id' => 1,
+            'id' => $model->id,
             'name' => $model->name,
             'email' => $model->email,
         ];

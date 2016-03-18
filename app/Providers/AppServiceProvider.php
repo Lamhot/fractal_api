@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Repositories\PenulisRepository;
+use App\Repositories\IPenulis;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(ScoreRepository::class, RedisScoreRepository::class);
+        $this->app->bind(IPenulis::class, PenulisRepository::class);
     }
 }

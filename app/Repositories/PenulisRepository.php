@@ -1,5 +1,5 @@
 <?php
-namespace AppRepositories;
+namespace App\Repositories;
 
 use App\Models\Penulis;
 
